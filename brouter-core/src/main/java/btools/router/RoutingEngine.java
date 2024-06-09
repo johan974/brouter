@@ -317,6 +317,65 @@ public class RoutingEngine extends Thread {
     }
   }
 
+  public int findNearestTrackPoint(long maxRunningTime) {
+    try {
+      startTime = System.currentTimeMillis();
+      this.maxRunningTime = maxRunningTime;
+      int nsections = waypoints.size() - 1;
+      OsmTrack[] refTracks = new OsmTrack[nsections]; // used ways for alternatives
+      OsmTrack[] lastTracks = new OsmTrack[nsections];
+      OsmTrack track = findTrack(refTracks, lastTracks);
+      if( track != null) {
+        OsmNodeNamed sourcePoint = waypoints.get( 0);
+        OsmNode nearestTrackPoint = track.matchedWaypoints.get( 0).crosspoint;
+        int distance = nearestTrackPoint.calcDistance( sourcePoint);
+        return distance;
+      }
+    } catch (IllegalArgumentException e) {
+      logException(e);
+    } catch (Exception e) {
+      logException(e);
+      logThrowable(e);
+    } catch (Error e) {
+      cleanOnOOM();
+      logException(e);
+      logThrowable(e);
+    } finally {
+      if (hasInfo() && routingContext.expctxWay != null) {
+        logInfo("expression cache stats=" + routingContext.expctxWay.cacheStats());
+      }
+
+      ProfileCache.releaseProfile(routingContext);
+
+      if (nodesCache != null) {
+        if (hasInfo() && nodesCache != null) {
+          logInfo("NodesCache status before close=" + nodesCache.formatStatus());
+        }
+        nodesCache.close();
+        nodesCache = null;
+      }
+      openSet.clear();
+      finished = true; // this signals termination to outside
+
+      if (infoLogWriter != null) {
+        try {
+          infoLogWriter.close();
+        } catch (Exception e) {
+        }
+        infoLogWriter = null;
+      }
+
+      if (stackSampler != null) {
+        try {
+          stackSampler.close();
+        } catch (Exception e) {
+        }
+        stackSampler = null;
+      }
+    }
+    return -1;
+  }
+
   public void doGetElev() {
     try {
       startTime = System.currentTimeMillis();

@@ -50,12 +50,9 @@ public class JohanRoutingEngineTest {
 
   @Test
   public void johanPointOnly() {
-    String msg = calcRoute(6.1068, 52.2199, 6.1068, 52.2199, "pointTrack", new RoutingContext());
-    Assert.assertNull("routing failed: " + msg, msg);
-
-    File trackFile = new File(workingDir, "paramTrack0.gpx");
-    trackFile.deleteOnExit();
-    Assert.assertTrue("result content mismatch", trackFile.exists());
+    int shortestDistance = calcPoint(6.1068, 52.2199);
+    System.out.println( "Shortest distance: " + shortestDistance );
+    Assert.assertEquals( 71, shortestDistance);
   }
 
   private String calcRoute(double flon, double flat, double tlon, double tlat, String trackname, RoutingContext rctx) {
@@ -87,6 +84,36 @@ public class JohanRoutingEngineTest {
     re.doRun(0);
 
     return re.getErrorMessage();
+  }
+
+  private int calcPoint(double flon, double flat) {
+    String wd = workingDir.getAbsolutePath();
+
+    List<OsmNodeNamed> wplist = new ArrayList<>();
+    OsmNodeNamed n;
+    n = new OsmNodeNamed();
+    n.name = "from";
+    n.ilon = 180000000 + (int) (flon * 1000000 + 0.5);
+    n.ilat = 90000000 + (int) (flat * 1000000 + 0.5);
+    wplist.add(n);
+
+    n = new OsmNodeNamed();
+    n.name = "to";
+    n.ilon = 180000000 + (int) (flon * 1000000 + 0.5);
+    n.ilat = 90000000 + (int) (flat * 1000000 + 0.5);
+    wplist.add(n);
+
+    RoutingContext rctx = new RoutingContext();
+    rctx.localFunction = wd + "/../../../../misc/profiles2/trekking.brf";
+
+    RoutingEngine re = new RoutingEngine(
+      wd + "/dummy",
+      wd + "/dummy2",
+      new File(wd, "/../../../../data"),
+      wplist,
+      rctx);
+
+    return re.findNearestTrackPoint(0);
   }
 
 }
