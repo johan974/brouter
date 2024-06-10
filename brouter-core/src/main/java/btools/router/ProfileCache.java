@@ -24,7 +24,7 @@ public final class ProfileCache {
   private long lastUseTime;
 
   private static ProfileCache[] apc = new ProfileCache[1];
-  private static boolean debug = Boolean.getBoolean("debugProfileCache");
+  private static final boolean debug = Boolean.getBoolean("debugProfileCache");
 
   public static synchronized void setSize(int size) {
     apc = new ProfileCache[size];

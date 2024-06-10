@@ -32,7 +32,7 @@ public class RoutingEngine extends Thread {
   public final static int BROUTER_ENGINEMODE_GETELEV = 2;
 
   private NodesCache nodesCache;
-  private SortedHeap<OsmPath> openSet = new SortedHeap<>();
+  private final SortedHeap<OsmPath> openSet = new SortedHeap<>();
   private boolean finished = false;
 
   protected List<OsmNodeNamed> waypoints = null;
@@ -40,12 +40,12 @@ public class RoutingEngine extends Thread {
   private int linksProcessed = 0;
 
   private int nodeLimit; // used for target island search
-  private int MAXNODES_ISLAND_CHECK = 500;
-  private OsmNodePairSet islandNodePairs = new OsmNodePairSet(MAXNODES_ISLAND_CHECK);
+  private final int MAXNODES_ISLAND_CHECK = 500;
+  private final OsmNodePairSet islandNodePairs = new OsmNodePairSet(MAXNODES_ISLAND_CHECK);
 
   private int engineMode = 0;
 
-  private int MAX_STEPS_CHECK = 10;
+  private final int MAX_STEPS_CHECK = 10;
 
   protected OsmTrack foundTrack = new OsmTrack();
   private OsmTrack foundRawTrack = null;
@@ -57,9 +57,9 @@ public class RoutingEngine extends Thread {
   private volatile boolean terminated;
 
   protected File segmentDir;
-  private String outfileBase;
-  private String logfileBase;
-  private boolean infoLogEnabled;
+  private final String outfileBase;
+  private final String logfileBase;
+  private final boolean infoLogEnabled;
   private Writer infoLogWriter;
   private StackSampler stackSampler;
   protected RoutingContext routingContext;
@@ -79,7 +79,7 @@ public class RoutingEngine extends Thread {
 
   private Object[] extract;
 
-  private boolean directWeaving = !Boolean.getBoolean("disableDirectWeaving");
+  private final boolean directWeaving = !Boolean.getBoolean("disableDirectWeaving");
   private String outfile;
 
   public RoutingEngine(String outfileBase, String logfileBase, File segmentDir,

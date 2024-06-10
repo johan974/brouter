@@ -10,17 +10,17 @@ import btools.mapaccess.OsmNode;
 
 public final class SearchBoundary {
 
-  private int minlon0;
-  private int minlat0;
-  private int maxlon0;
-  private int maxlat0;
+  private final int minlon0;
+  private final int minlat0;
+  private final int maxlon0;
+  private final int maxlat0;
 
-  private int minlon;
-  private int minlat;
-  private int maxlon;
-  private int maxlat;
-  private int radius;
-  private OsmNode p;
+  private final int minlon;
+  private final int minlat;
+  private final int maxlon;
+  private final int maxlat;
+  private final int radius;
+  private final OsmNode p;
 
   int direction;
 

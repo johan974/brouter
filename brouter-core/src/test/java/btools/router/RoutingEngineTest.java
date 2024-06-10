@@ -15,7 +15,7 @@ public class RoutingEngineTest {
 
   @Before
   public void before() {
-    URL resulturl = this.getClass().getResource("/testtrack0.gpx");
+    URL resulturl = this.getClass().getResource("/data/safe-stuff/testtrack0.gpx");
     Assert.assertNotNull("reference result not found: ", resulturl);
     File resultfile = new File(resulturl.getFile());
     workingDir = resultfile.getParentFile();

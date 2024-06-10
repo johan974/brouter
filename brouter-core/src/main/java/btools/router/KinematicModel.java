@@ -42,9 +42,9 @@ final class KinematicModel extends OsmPathModel {
 
   private int nodeIdxMaxspeed;
 
-  protected BExpressionContextWay ctxWay;
-  protected BExpressionContextNode ctxNode;
-  protected Map<String, String> params;
+  private BExpressionContextWay ctxWay;
+  private BExpressionContextNode ctxNode;
+  private Map<String, String> params;
 
   private boolean initDone = false;
 
@@ -81,7 +81,7 @@ final class KinematicModel extends OsmPathModel {
     cost0 = (pw + p_standby) / vmax + f_roll + f_air * vmax * vmax;
   }
 
-  protected float getParam(String name, float defaultValue) {
+  private float getParam(String name, float defaultValue) {
     String sval = params == null ? null : params.get(name);
     if (sval != null) {
       return Float.parseFloat(sval);

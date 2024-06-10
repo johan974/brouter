@@ -108,7 +108,7 @@ public class JohanRoutingEngineTest {
 
     RoutingEngine re = new RoutingEngine(
       wd + "/dummy",
-      wd + "/dummy2",
+      wd + "/dummy",
       new File(wd, "/../../../../data"),
       wplist,
       rctx);

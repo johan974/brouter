@@ -14,8 +14,8 @@ public final class VoiceHintProcessor {
   double INTERNAL_CATCHING_RANGE = 2.;
 
   // private double catchingRange; // range to catch angles and merge turns
-  private boolean explicitRoundabouts;
-  private int transportMode;
+  private final boolean explicitRoundabouts;
+  private final int transportMode;
 
   public VoiceHintProcessor(double catchingRange, boolean explicitRoundabouts, int transportMode) {
     // this.catchingRange = catchingRange;
@@ -99,6 +99,7 @@ public final class VoiceHintProcessor {
             if (!badWay.isBadOneway() &&
               badWay.isGoodForCars()) {
               isExit = true;
+              break;
             }
           }
         }

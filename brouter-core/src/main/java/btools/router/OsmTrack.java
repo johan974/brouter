@@ -60,7 +60,7 @@ public final class OsmTrack {
 
   public String name = "unset";
 
-  protected List<MatchedWaypoint> matchedWaypoints;
+  List<MatchedWaypoint> matchedWaypoints;
   public boolean exportWaypoints = false;
 
   public void addNode(OsmPathElement node) {
@@ -485,7 +485,7 @@ public final class OsmTrack {
           MatchedWaypoint mwpt = getMatchedWaypoint(nodeNr);
           if (mwpt != null && mwpt.direct) {
             input.cmd = VoiceHint.BL;
-            input.angle = (float) (nodeNr == 0 ? node.origin.message.turnangle : node.message.turnangle);
+            input.angle = nodeNr == 0 ? node.origin.message.turnangle : node.message.turnangle;
             input.distanceToNext = node.calcDistance(node.origin);
           }
         }

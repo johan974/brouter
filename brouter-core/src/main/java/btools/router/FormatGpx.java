@@ -68,7 +68,7 @@ public class FormatGpx extends Formatter {
     if (turnInstructionMode == 3) {
       sb.append(" creator=\"OsmAndRouter\" version=\"1.1\">\n");
     } else {
-      sb.append(" creator=\"BRouter-" + t.version + "\" version=\"1.1\">\n");
+      sb.append(" creator=\"BRouter-" + OsmTrack.version + "\" version=\"1.1\">\n");
     }
     if (turnInstructionMode == 9) {
       sb.append(" <metadata>\n");

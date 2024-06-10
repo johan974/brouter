@@ -376,9 +376,7 @@ public class OsmNogoPolygon extends OsmNodeNamed {
       if (sp0x <= px && px <= sp1x) {
         return true;
       }
-      if (sp0x >= px && px >= sp1x) {
-        return true;
-      }
+      return sp0x >= px && px >= sp1x;
     } else // S is vertical, so test y coordinate
     {
       final int sp0y = seg_p0.y;
@@ -388,11 +386,8 @@ public class OsmNogoPolygon extends OsmNodeNamed {
       if (sp0y <= py && py <= sp1y) {
         return true;
       }
-      if (sp0y >= py && py >= sp1y) {
-        return true;
-      }
+      return sp0y >= py && py >= sp1y;
     }
-    return false;
   }
 
 /* Copyright 2001 softSurfer, 2012 Dan Sunday, 2018 Norbert Truchsess

@@ -27,21 +27,21 @@ public class VoiceHint {
   static final int TU = 15; // 180 degree u-turn
   static final int BL = 16; // Beeline routing
 
-  int ilon;
-  int ilat;
-  short selev;
-  int cmd;
-  MessageData oldWay;
-  MessageData goodWay;
+  public int ilon;
+  public int ilat;
+  public short selev;
+  public int cmd;
+  public MessageData oldWay;
+  public MessageData goodWay;
   List<MessageData> badWays;
-  double distanceToNext;
-  int indexInTrack;
+  public double distanceToNext;
+  public int indexInTrack;
 
   public float getTime() {
     return oldWay == null ? 0.f : oldWay.time;
   }
 
-  float angle = Float.MAX_VALUE;
+  public float angle = Float.MAX_VALUE;
   boolean turnAngleConsumed;
   boolean needsRealTurn;
   int maxBadPrio = -1;
@@ -596,7 +596,7 @@ public class VoiceHint {
   }
 
   private void appendTurnGeometry(StringBuilder sb, MessageData msg) {
-    sb.append("(").append((int) (msg.turnangle + 0.5)).append(")").append((int) (msg.priorityclassifier));
+    sb.append("(").append((int) (msg.turnangle + 0.5)).append(")").append(msg.priorityclassifier);
   }
 
 }

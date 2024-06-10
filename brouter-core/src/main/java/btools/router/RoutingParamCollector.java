@@ -2,6 +2,7 @@ package btools.router;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -102,7 +103,7 @@ public class RoutingParamCollector {
    */
   public Map<String, String> getUrlParams(String url) throws UnsupportedEncodingException {
     Map<String, String> params = new HashMap<>();
-    String decoded = URLDecoder.decode(url, "UTF-8");
+    String decoded = URLDecoder.decode(url, StandardCharsets.UTF_8);
     StringTokenizer tk = new StringTokenizer(decoded, "?&");
     while (tk.hasMoreTokens()) {
       String t = tk.nextToken();
@@ -217,9 +218,9 @@ public class RoutingParamCollector {
         } else if (key.equals("exportWaypoints")) {
           rctx.exportWaypoints = (Integer.parseInt(value) == 1);
         } else if (key.equals("format")) {
-          rctx.outputFormat = ((String) value).toLowerCase();
+          rctx.outputFormat = value.toLowerCase();
         } else if (key.equals("trackFormat")) {
-          rctx.outputFormat = ((String) value).toLowerCase();
+          rctx.outputFormat = value.toLowerCase();
         } else if (key.startsWith("profile:")) {
           if (rctx.keyValues == null) rctx.keyValues = new HashMap<>();
           rctx.keyValues.put(key.substring(8), value);

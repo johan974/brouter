@@ -21,8 +21,8 @@ final class StdModel extends OsmPathModel {
     return new StdPath();
   }
 
-  protected BExpressionContextWay ctxWay;
-  protected BExpressionContextNode ctxNode;
+  private BExpressionContextWay ctxWay;
+  private BExpressionContextNode ctxNode;
 
 
   @Override

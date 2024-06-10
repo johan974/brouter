@@ -28,7 +28,7 @@ public class FormatJson extends Formatter {
     sb.append("    {\n");
     sb.append("      \"type\": \"Feature\",\n");
     sb.append("      \"properties\": {\n");
-    sb.append("        \"creator\": \"BRouter-" + t.version + "\",\n");
+    sb.append("        \"creator\": \"BRouter-" + OsmTrack.version + "\",\n");
     sb.append("        \"name\": \"").append(t.name).append("\",\n");
     sb.append("        \"track-length\": \"").append(t.distance).append("\",\n");
     sb.append("        \"filtered ascend\": \"").append(t.ascend).append("\",\n");
