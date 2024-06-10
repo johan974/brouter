@@ -325,11 +325,24 @@ public class RoutingEngine extends Thread {
       OsmTrack[] refTracks = new OsmTrack[nsections]; // used ways for alternatives
       OsmTrack[] lastTracks = new OsmTrack[nsections];
       OsmTrack track = findTrack(refTracks, lastTracks);
+      int shortestDistance = 100000000;
       if( track != null) {
         OsmNodeNamed sourcePoint = waypoints.get( 0);
-        OsmNode nearestTrackPoint = track.matchedWaypoints.get( 0).crosspoint;
-        int distance = nearestTrackPoint.calcDistance( sourcePoint);
-        return distance;
+        for( MatchedWaypoint matchedWaypoint: track.matchedWaypoints) {
+          OsmNode nearestTrackPoint = matchedWaypoint.crosspoint;
+          int distanceCrosspoint = nearestTrackPoint.calcDistance( sourcePoint);
+          if( distanceCrosspoint < shortestDistance ) {
+            shortestDistance = distanceCrosspoint;
+          }
+          for( MatchedWaypoint nearestWaypoint: track.matchedWaypoints) {
+            OsmNode nearestPoint = nearestWaypoint.crosspoint;
+            if( nearestPoint.calcDistance( sourcePoint) < shortestDistance ) {
+              System.out.println( "*** Nearest waypoint OVERRULES crosspoint!!!");
+              shortestDistance = nearestPoint.calcDistance( sourcePoint);
+            }
+          }
+        }
+        return shortestDistance;
       }
     } catch (IllegalArgumentException e) {
       logException(e);
